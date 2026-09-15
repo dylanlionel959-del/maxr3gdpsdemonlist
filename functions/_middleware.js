@@ -1,6 +1,6 @@
 export async function onRequest(context) {
   // Lista de códigos ISO de países que deseas bloquear (ej: 'US' para Estados Unidos, 'CN' para China)
-  const paisesBloqueados = ['VE', 'CN', 'RU'];
+  const paisesBloqueados = ['KP', 'JP', 'RU', 'CN', 'VN', 'BR', 'IN', 'IR', 'IQ', 'SA', 'AE'];
 
   // Cloudflare detecta automáticamente el país del visitante
   const codigoPais = context.request.cf ? context.request.cf.country : null;
