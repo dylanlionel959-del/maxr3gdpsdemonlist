@@ -1,21 +1,64 @@
 export async function onRequest(context) {
-  // Detecta el código de país de la IP a nivel de servidor de Cloudflare
-  const country = context.request.cf?.country;
+  // Lista de códigos ISO de países que deseas bloquear (ej: 'US' para Estados Unidos, 'CN' para China)
+  const paisesBloqueados = ['US', 'CN', 'RU'];
 
-  // Si el visitante es de Venezuela (VE), interceptamos la conexión
-  if (country === 'VE') {
-    const url = new URL(context.request.url);
+  // Cloudflare detecta automáticamente el país del visitante
+  const codigoPais = context.request.cf ? context.request.cf.country : null;
+
+  if (codigoPais && paisesBloqueados.includes(codigoPais)) {
     
-    // Busca y lee el archivo HTML local que creamos para el error
-    const errorPage = await context.env.ASSETS.fetch(new URL('/error403.html', url.origin));
-    
-    // Devuelve el HTML con código de estado 403 Forbidden
-    return new Response(errorPage.body, {
+    // Tu HTML personalizado optimizado para servirse desde el Edge de Cloudflare
+    const htmlPersonalizado = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>403 Forbidden - Maxr3 GDPS Demon List</title>
+        <style>
+            body { font-family: sans-serif; padding: 20px; background-color: #fafafa; color: #333; }
+            hr { border: 0; border-top: 1px solid #ccc; }
+        </style>
+    </head>
+    <body>
+
+        <h1>403 Forbidden</h1>
+        <h2>Maxr3 GDPS Demon List</h2>
+        
+        <p>Access Denied. You do not have permission to access this resource on the server.</p>
+        
+        <hr>
+        
+        <p><strong>Error Code:</strong> 403</p>
+        <p><strong>Request ID:</strong> <span id="request-id">Generating...</span></p>
+
+        <script>
+            function generateRequestId(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                const charactersLength = characters.length;
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+
+            document.getElementById('request-id').textContent = generateRequestId(64);
+        </script>
+
+    </body>
+    </html>
+    `;
+
+    // Retorna tu página web con el estado de seguridad correcto (403)
+    return new Response(htmlPersonalizado, {
       status: 403,
-      headers: { "Content-Type": "text/html; charset=UTF-8" }
+      headers: { 
+        "Content-Type": "text/html; charset=utf-8" 
+      },
     });
   }
 
-  // Si no es de Venezuela, permite que la Demon List cargue normalmente
+  // Si el país no está bloqueado, el sitio web carga normalmente
   return context.next();
 }
