@@ -46,7 +46,7 @@ Welcome to the official **Maxr3 GDPS Demon List**! This repository contains the 
 │   ├── _editors.json
 │   ├── _list.json
 │   ├── Dorabaebasic10 Buff.json
-│   └── Kratos.json
+│    
 ├── index.html
 ├── README.md
 └── worker.js
