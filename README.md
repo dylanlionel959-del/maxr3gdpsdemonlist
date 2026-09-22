@@ -8,7 +8,7 @@ Welcome to the official **Maxr3 GDPS Demon List**! This repository contains the 
 
 | Web Interface Preview | Mobile / App View |
 | :---: | :---: |
-| ![Website Preview](./assets/Website%20preview.jpg) | ![App Preview](./assets/Website%20preview.jpg) |
+| ![Website Preview](./assets/Website%20preview.jpg) | ![App Preview](./assets/In%20The%20App%20Preview.jpg) |
 
 ---
 
@@ -29,7 +29,7 @@ Welcome to the official **Maxr3 GDPS Demon List**! This repository contains the 
 - **Author & Verifier:** Maxr3
 - **Qualifying Percentage:** 100%
 - **Password:** Free To Copy
-- **Verification Video:** [Watch on YouTube](https://youtu.be/Ea8gJinK6C4?si=T5N-kyiNrp4AR6D4)
+- **Verification Video:** [Watch on YouTube](https://youtu.be/Ea8gJinK6C4?si=73gKwNojhzYIozY8)
 
 ---
 
@@ -37,12 +37,13 @@ Welcome to the official **Maxr3 GDPS Demon List**! This repository contains the 
 
 ```text
 ├── assets/
+│   ├── In The App Preview.jpg
 │   └── Website preview.jpg
 ├── data/
 │   ├── _editors.json
 │   ├── _list.json
 │   ├── Dorabaebasic10 Buff.json
-│   
+│   └── Kratos.json
 ├── index.html
 ├── README.md
 └── worker.js
